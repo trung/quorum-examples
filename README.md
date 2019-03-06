@@ -53,6 +53,7 @@ issues with the version of curl bundled with Vagrant.
 
 1. Install Docker (https://www.docker.com/get-started)
    * If your Docker distribution does not contain `docker-compose`, follow [this](https://docs.docker.com/compose/install/) to install Docker Compose
+   * Make sure Docker and Docker Compose [compatible](https://docs.docker.com/compose/compose-file/compose-versioning/) with compose file version
    * Make sure your Docker daemon has at least 4G memory
 1. Download and run `docker-compose`
    ```sh
@@ -67,7 +68,7 @@ issues with the version of curl bundled with Vagrant.
 1. Run `docker ps` to verify that all quorum-examples containers (7 nodes and 7 tx managers) are **healthy**
 1. __Note__: to run the 7nodes demo, use the following snippet to open `geth` Javascript console to a desired node (using container name from `docker ps`) and send a private transaction
    ```sh
-   $ docker exec -it quorum-examples_node1_1 geth attach /qdata/dd/geth.ipc
+   $ docker exec -it quorum-examples_node1_1 geth attach ipc:/qdata/dd/geth.ipc
    Welcome to the Geth JavaScript console!
 
    instance: Geth/node1-istanbul/v1.7.2-stable/linux-amd64/go1.9.7
