@@ -18,10 +18,10 @@ function init() {
 	echo "[*] Configuring node $node (permissioned=$perm)"
 	mkdir -p qdata/dd$node/{keystore,geth}
 	cp permissioned-nodes.json qdata/dd$node/static-nodes.json
-	cp permissioned-nodes.json qdata/dd$node/
 	cp keys/key$node qdata/dd$node/keystore
+	cp raft/nodekey$node qdata/dd$node/geth/nodekey
 	if [[ "$perm" == "yes" ]]; then
-		cp raft/nodekey$node qdata/dd$node/geth/nodekey
+		cp permissioned-nodes.json qdata/dd$node/
 	fi
 	geth --datadir qdata/dd$node init genesis.json
 }
