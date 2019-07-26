@@ -32,7 +32,8 @@ function startNode() {
 
 	echo "[*] Start node $node"
 	QUORUM_GETH_ARGS=${QUORUM_GETH_ARGS:-}
-	ARGS="--nodiscover --verbosity 5 --networkid $NETWORK_ID --raft --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,raft --emitcheckpoints $QUORUM_GETH_ARGS"
+	NODE_GETH_ARGS=$(eval "echo \${`echo QUORUM_GETH_ARGS_${node}`:-}")
+	ARGS="--nodiscover --verbosity 5 --networkid $NETWORK_ID --raft --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,raft --emitcheckpoints $QUORUM_GETH_ARGS $NODE_GETH_ARGS"
 	if [[ "${permissioned[node]}" == "yes" ]]; then
 		ARGS="$ARGS --permissioned"
 	fi
@@ -90,12 +91,10 @@ else
 fi
 
 echo "[*] Starting Ethereum nodes with ChainID and NetworkId of $NETWORK_ID"
-set -v
 for i in {1..7}
 do
 	startNode $i
 done
-set +v
 
 echo
 echo "All nodes configured. See 'qdata/logs' for logs, and run e.g. 'geth attach qdata/dd1/geth.ipc' to attach to the first Geth node."
