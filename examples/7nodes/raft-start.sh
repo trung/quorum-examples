@@ -33,11 +33,11 @@ function startNode() {
 	echo "[*] Start node $node"
 	QUORUM_GETH_ARGS=${QUORUM_GETH_ARGS:-}
 	NODE_GETH_ARGS=$(eval "echo \${`echo QUORUM_GETH_ARGS_${node}`:-}")
-	ARGS="--nodiscover --verbosity 5 --networkid $NETWORK_ID --raft --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,raft --emitcheckpoints $QUORUM_GETH_ARGS $NODE_GETH_ARGS"
+	ARGS="--nodiscover --verbosity 5 --networkid $NETWORK_ID --raft --rpc --rpcaddr 0.0.0.0 --rpcapi rpc,admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,raft --emitcheckpoints $QUORUM_GETH_ARGS $NODE_GETH_ARGS"
 	if [[ "${permissioned[node]}" == "yes" ]]; then
 		ARGS="$ARGS --permissioned"
 	fi
-	PRIVATE_CONFIG=qdata/c$node/tm.ipc nohup geth --datadir qdata/dd$node $ARGS --raftport $((50400 + $node)) --rpcport $((22000 + $node - 1)) --port $((21000 + $node - 1)) --unlock 0 --password passwords.txt 2>>qdata/logs/$node.log &
+	PRIVATE_CONFIG=qdata/c$node/tm.ipc nohup geth --datadir qdata/dd$node $ARGS --raftport $((50400 + $node)) --rpcport $((22000 + $node - 1)) --port $((21000 + $node - 1)) --ws --wsapi eth --wsport $((23000 + $node - 1)) --unlock 0 --password passwords.txt 2>>qdata/logs/$node.log &
 }
 
 privacyImpl=tessera
