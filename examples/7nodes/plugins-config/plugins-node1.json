@@ -1,0 +1,10 @@
+{
+	"baseDir": "/Users/trung/Projects/Quorum/plugins",
+	"providers": {
+	   "security": {
+		"name":"quorum-plugin-enterprise-security-manager",
+		"version":"1.0.0",
+		"config": "file:///Users/trung/Projects/Quorum/workspace/quorum-plugin-enterprise-security-manager/examples/okta/plugin-config-node1.json"
+	   }
+	}
+}

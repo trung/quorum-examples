@@ -1,0 +1,13 @@
+{
+	"baseDir": "/Users/trung/Projects/Quorum/plugins",
+	"providers": {
+	   "security": {
+			"name":"quorum-plugin-simple-security-manager-java",
+			"version":"1.0.0",
+			"config": [
+				"abc|node1 node2|*:*",
+				"xyz|node1|admin:* rpc:*"
+	   		]
+		}
+	}
+}
